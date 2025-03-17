@@ -2,17 +2,17 @@ import javax.swing.*;
 import java.awt.*;
 import java.sql.*;
 
-class AdmiManaLog1 extends JFrame{
-    AdmiManaLog1 ()
+class AdminLogin1 extends JFrame{
+    AdminLogin1 ()
     {
         Font f1=new Font("Calibri",Font.BOLD,20);
         Font f2=new Font("Calibri",Font.PLAIN,20);
         Font f3 = new Font("Calibri", Font.BOLD, 25);
 
-        JLabel l1=new JLabel("Enter Manager Username");
+        JLabel l1=new JLabel("Enter Username:");
         JTextField t1=new JTextField(20);
 
-        JLabel l2=new JLabel("Enter Password");
+        JLabel l2=new JLabel("Enter Password:");
         JPasswordField t2=new JPasswordField(20);
 
         JButton b1=new JButton("Back");
@@ -58,9 +58,9 @@ class AdmiManaLog1 extends JFrame{
                     {
                         JOptionPane.showMessageDialog(null,"Please enter username");
                     }
-                    else if (t1.getText().equals("Manager")&&t2.getText().toString().equals("1234"))
+                    else if (t1.getText().equals("Admin")&&t2.getText().toString().equals("1234"))
                     {
-                        new AdmiManager1();
+                        new Admin1();
                         dispose();
                     }
                     else
@@ -90,13 +90,13 @@ class AdmiManaLog1 extends JFrame{
         setVisible(true);
         setSize(700,500);
         setLocationRelativeTo(null);
-        setTitle("AdmiManager Login");
+        setTitle("Admin Login");
     }
 }
 
-class AdmiManaLogin {
+class AdminLogin {
     public static void main(String[] args) {
-        AdmiManaLog1 obj=new AdmiManaLog1();
+        AdminLogin1 obj=new AdminLogin1();
     }
 
 }

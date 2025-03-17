@@ -5,16 +5,16 @@ import java.awt.*;
 class student1 extends JFrame{
     student1(String name,String Class,int phone)
     {
-        Font f1=new Font("Calibri",Font.BOLD,20);
-        Font f2=new Font("Calibri",Font.PLAIN,20);
-        Font f3=new Font("Calibri",Font.BOLD,25);
+        Font f = new Font("Futura", Font.BOLD, 40);
+        Font f2 = new Font("Calibri", Font.PLAIN, 22);
+        Font f3 = new Font("Calibri", Font.BOLD, 22);
 
         JPanel sidepanel=new JPanel();
         sidepanel.setPreferredSize(new Dimension(250,0));///height auto adjust
         sidepanel.setBackground(new Color(70, 21, 107));
         sidepanel.setLayout(new BoxLayout(sidepanel,BoxLayout.Y_AXIS));
 
-        ImageIcon image=new ImageIcon("C:/myprojects/rdclasses/rdlogo.jpg");
+        ImageIcon image=new ImageIcon("C:/myprojects/rdclasses/logo1.png");
         Image imageIcon = image.getImage().getScaledInstance(90, 90, Image.SCALE_SMOOTH);
         image = new ImageIcon(imageIcon);
 
@@ -49,7 +49,7 @@ class student1 extends JFrame{
         b3.setAlignmentX(Component.CENTER_ALIGNMENT);
         b4.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        Sname.setFont(f1);
+        Sname.setFont(f3);
         Classs.setFont(f2);
         classs.setFont(f2);
         roll.setFont(f2);
@@ -76,22 +76,17 @@ class student1 extends JFrame{
 
         prof.setBounds(530,50,80,80);
 
-        Sname.setBounds(550,150,100,30);
-
-        Classs.setBounds(300,200,80,30);
-        classs.setBounds(400,200,80,30);
-
-        roll.setBounds(560,200,80,30);
-        Rollno.setBounds(660,200,30,30);
-
-        Address.setBounds(300,250,80,60);
-        address.setBounds(400,250,80,60);
-
-        Contact.setBounds(300,330,80,30);
-        contact.setBounds(400,330,80,30);
-
-        Gender.setBounds(560,330,80,30);
-        gender.setBounds(660,330,80,30);
+        Sname.setBounds(500,150,200,30);
+        Classs.setBounds(300,200,100,30);
+        classs.setBounds(420,200,150,30);
+        roll.setBounds(600,200,100,30);
+        Rollno.setBounds(720,200,100,30);
+        Address.setBounds(300,250,100,60);
+        address.setBounds(420,250,300,60);
+        Contact.setBounds(300,330,100,30);
+        contact.setBounds(420,330,150,30);
+        Gender.setBounds(600,330,100,30);
+        gender.setBounds(720,330,100,30);
 
         b1.setBounds(10,150,220,50);
         b2.setBounds(10,220,220,50);
@@ -124,8 +119,8 @@ class student1 extends JFrame{
 
         b3.addActionListener(
                 a->{
-                    new fee_details1(name,Class,phone);
-                    dispose();
+                    new student_feedetails1(name,Class,phone);
+
                 }
         );
 
@@ -175,6 +170,7 @@ class student1 extends JFrame{
                     contact.setText(rs.getString("phone"));
                     address.setText(rs.getString("address"));
                     gender.setText(rs.getString("gender"));
+                    Rollno.setText(rs.getString("roll"));
                 }
             }
         }
@@ -195,6 +191,6 @@ class student1 extends JFrame{
 
 class Student {
     public static void main(String[] args) {
-        student1 obj=new student1("Rajshree","Eight",12345);
+        student1 obj=new student1("Heera","Eight",12345);
     }
 }

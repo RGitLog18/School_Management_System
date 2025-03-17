@@ -56,7 +56,7 @@ class student_notice1 extends JFrame {
         b4.setFont(f3);
 
 //        label.setBounds(25, 0, 90, 90);
-        prof.setBounds(70, 50, 80, 80);
+        prof.setBounds(80, 50, 80, 80);
 
         b1.setBounds(10, 150, 220, 50);
         b2.setBounds(10, 220, 220, 50);
@@ -67,6 +67,9 @@ class student_notice1 extends JFrame {
         b2.setCursor(new Cursor(Cursor.HAND_CURSOR));
         b3.setCursor(new Cursor(Cursor.HAND_CURSOR));
         b4.setCursor(new Cursor(Cursor.HAND_CURSOR));
+
+        Timer timer = new Timer(500, e -> fetchCardfromDb());
+        timer.start();
 
         b1.addActionListener(a -> {
             new StudentAssignment(name,Class,phone);
@@ -79,8 +82,8 @@ class student_notice1 extends JFrame {
         });
 
         b3.addActionListener(a -> {
-            new fee_details1(name,Class,phone);
-            dispose();
+            new student_feedetails1(name,Class,phone);
+
         });
 
         b4.addActionListener(a -> {
@@ -102,23 +105,7 @@ class student_notice1 extends JFrame {
         c.add(sidepanel, BorderLayout.WEST);
 
         // Fetch notices from the database and display them
-        String url = "jdbc:mysql://localhost:3306/rdclasses";
-        try (Connection con = DriverManager.getConnection(url, "root", "R1a2j3#*")) {
-            String sql = "SELECT * FROM notices WHERE role = 'student'";
-            try (PreparedStatement pst = con.prepareStatement(sql)) {
-                ResultSet rs = pst.executeQuery();
-
-                if (!rs.next()) {
-                    addCard("No notices yet.");
-                } else {
-                    do {
-                        addCard(rs.getString("notices"));
-                    } while (rs.next());
-                }
-            }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e.getMessage());
-        }
+      fetchCardfromDb();
 
         setSize(900, 500);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -127,6 +114,36 @@ class student_notice1 extends JFrame {
         setLocationRelativeTo(null);
     }
 
+    public void fetchCardfromDb()
+    {
+        String url = "jdbc:mysql://localhost:3306/rdclasses";
+        try (Connection con = DriverManager.getConnection(url, "root", "R1a2j3#*")) {
+            String sql = "SELECT * FROM notices WHERE role = 'student'";
+            try (PreparedStatement pst = con.prepareStatement(sql)) {
+                ResultSet rs = pst.executeQuery();
+
+                cardContainer.removeAll();
+                cardContainer.revalidate();
+                cardContainer.repaint();
+
+
+                if (!rs.next()) {
+                    addCard("No notices yet.");
+                } else {
+                    do {
+                        addCard(rs.getString("notices"));
+                    } while (rs.next());
+                }
+
+                cardContainer.revalidate();
+                cardContainer.repaint();
+
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
+
+    }
     // Method to add notice cards dynamically
     public void addCard(String description) {
         JPanel card = new JPanel() {

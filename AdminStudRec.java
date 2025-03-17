@@ -1,9 +1,9 @@
 import javax.swing.*;
 import java.awt.*;
 
-class ManageStudentRecords1 extends JFrame{
-    ManageStudentRecords1(){
-
+class AdminStudentRecords1 extends JFrame{
+    AdminStudentRecords1(){
+        double balance = 0.0;
         Font f = new Font("Futura", Font.BOLD, 30);
         Font f2 = new Font("Calibri", Font.PLAIN, 22);
         Font f3 = new Font("Calibri", Font.BOLD, 18);
@@ -38,10 +38,7 @@ class ManageStudentRecords1 extends JFrame{
         card.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2)); // Card Border
 
         JButton type=new JButton("Profile");
-        JButton b1 = new JButton("New Record");
         JButton b2 = new JButton("Check Records");
-        JButton b3 = new JButton("Edit Record");
-        JButton b4 = new JButton("Delete Record");
 
         JButton type1=new JButton("Teacher Records");
 
@@ -49,6 +46,7 @@ class ManageStudentRecords1 extends JFrame{
         JButton b5=new JButton("Profile");
         JButton b10=new JButton("Notices");
         JButton b11=new JButton("Log Out");
+
         JButton one= new JButton("First");
         JButton two= new JButton("Second");
         JButton three= new JButton("Third");
@@ -59,7 +57,6 @@ class ManageStudentRecords1 extends JFrame{
         JButton eighth= new JButton("Eight");
         JButton nineth= new JButton("Nine");
         JButton tenth= new JButton("Ten");
-
 
         b5.setFont(f2);
         b10.setFont(f2);
@@ -76,15 +73,8 @@ class ManageStudentRecords1 extends JFrame{
         nineth.setFont(f4);
         tenth.setFont(f4);
         eighth.setFont(f4);
-        b1.setFont(f3);
         b2.setFont(f3);
-        b3.setFont(f3);
-        b4.setFont(f3);
-
-        b1.setEnabled(false);
         b2.setEnabled(false);
-        b3.setEnabled(false);
-        b4.setEnabled(false);
 
         final String[] enable = new String[1];
 
@@ -97,31 +87,8 @@ class ManageStudentRecords1 extends JFrame{
         type.setBounds(10,205,220,45);
         type1.setBounds(10,265,220,45);
         b11.setBounds(10,320,220,45);
-//        b11.setBounds(10,375,220,45);
 
-        b1.setBounds(260,390,150,40);
-        b2.setBounds(430,390,150,40);
-        b3.setBounds(600,390,150,40);
-        b4.setBounds(770,390,150,40);
-
-        b5.setBackground(new Color(249, 249, 249));
-        b10.setBackground(new Color(249, 249, 249));
-        b11.setForeground(new Color(249, 249, 249));
-
-        type.setBackground(new Color(249, 249, 249));
-        type1.setBackground(new Color(249, 249, 249));
-
-        b1.setBackground(new Color(70, 21, 107));
-        b2.setBackground(new Color(70, 21, 107));
-        b3.setBackground(new Color(70, 21, 107));
-        b4.setBackground(new Color(70, 21, 107));
-
-        b1.setForeground(new Color(249, 249, 249));
-        b2.setForeground(new Color(249, 249, 249));
-        b3.setForeground(new Color(249, 249, 249));
-        b4.setForeground(new Color(249, 249, 249));
-        b11.setBackground(new Color(168, 7, 33));
-        b11.setForeground(new Color(249, 249, 249));
+        b2.setBounds(490,390,150,40);
 
         one.setBounds(320,10,220,60);
         two.setBounds(580,10,220,60);
@@ -136,10 +103,19 @@ class ManageStudentRecords1 extends JFrame{
         nineth.setBounds(320, 320, 220, 60);
         tenth.setBounds(580, 320, 220, 60);
 
-        b1.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        b5.setBackground(new Color(249, 249, 249));
+        b10.setBackground(new Color(249, 249, 249));
+        b11.setForeground(new Color(249, 249, 249));
+
+        type.setBackground(new Color(249, 249, 249));
+        type1.setBackground(new Color(249, 249, 249));
+
+        b2.setBackground(new Color(70, 21, 107));
+        b2.setForeground(new Color(249, 249, 249));
+        b11.setBackground(new Color(168, 7, 33));
+        b11.setForeground(new Color(249, 249, 249));
+
         b2.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        b3.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        b4.setCursor(new Cursor(Cursor.HAND_CURSOR));
         b5.setCursor(new Cursor(Cursor.HAND_CURSOR));
         one.setCursor(new Cursor(Cursor.HAND_CURSOR));
         two.setCursor(new Cursor(Cursor.HAND_CURSOR));
@@ -160,10 +136,7 @@ class ManageStudentRecords1 extends JFrame{
         Container c = getContentPane();
         c.setLayout(null);
 
-        c.add(b1);
         c.add(b2);
-        c.add(b3);
-        c.add(b4);
         c.add(b10);
         c.add(b11);
         c.add(one);
@@ -186,37 +159,28 @@ class ManageStudentRecords1 extends JFrame{
         c.add(sidepanel,BorderLayout.WEST);
         type.addActionListener(
                 a -> {
-                    new AdmiManager1();
+                    new Admin1();
                     dispose();
                 }
         );
 
         type1.addActionListener(
                 a->{
-                    new ManageTeacherRecords1();
+                    new adminTecRec1();
                     dispose();
                 }
         );
 
         b11.addActionListener(
                 a->{
-                    new AdmiManaLog1();
+                    new AdminLogin1();
                     dispose();
                 }
         );
 
         b5.addActionListener(
                 a->{
-                    new AdmiManager1();
-                    dispose();
-                }
-        );
-
-        b1.addActionListener(
-                a->
-                {
-
-                    new NewAdmission1(enable[0]);
+                    new AdminLogin1();
                     dispose();
                 }
         );
@@ -275,29 +239,10 @@ class ManageStudentRecords1 extends JFrame{
                 }
         );
 
-        b3.addActionListener(
-                a->
-                {
-                    new EditRecord1(enable[0]);
-                    dispose();
-                }
-        );
-
-        b4.addActionListener(
-                a->
-                {
-                    new DeleteRecord1(enable[0]);
-                    dispose();
-                }
-        );
-
         one.addActionListener(
                 a->
                 {
-                    b1.setEnabled(true);
                     b2.setEnabled(true);
-                    b3.setEnabled(true);
-                    b4.setEnabled(true);
                     enable[0] ="One";
                 }
         );
@@ -305,10 +250,7 @@ class ManageStudentRecords1 extends JFrame{
         two.addActionListener(
                 a->
                 {
-                    b1.setEnabled(true);
                     b2.setEnabled(true);
-                    b3.setEnabled(true);
-                    b4.setEnabled(true);
                     enable[0] ="Two";
                 }
         );
@@ -316,10 +258,7 @@ class ManageStudentRecords1 extends JFrame{
         three.addActionListener(
                 a->
                 {
-                    b1.setEnabled(true);
                     b2.setEnabled(true);
-                    b3.setEnabled(true);
-                    b4.setEnabled(true);
                     enable[0] ="Three";
                 }
         );
@@ -327,10 +266,7 @@ class ManageStudentRecords1 extends JFrame{
         fourth.addActionListener(
                 a->
                 {
-                    b1.setEnabled(true);
                     b2.setEnabled(true);
-                    b3.setEnabled(true);
-                    b4.setEnabled(true);
                     enable[0] ="Four";
                 }
         );
@@ -338,10 +274,7 @@ class ManageStudentRecords1 extends JFrame{
         fifth.addActionListener(
                 a->
                 {
-                    b1.setEnabled(true);
                     b2.setEnabled(true);
-                    b3.setEnabled(true);
-                    b4.setEnabled(true);
                     enable[0] ="Five";
                 }
         );
@@ -349,10 +282,7 @@ class ManageStudentRecords1 extends JFrame{
         sixth.addActionListener(
                 a->
                 {
-                    b1.setEnabled(true);
                     b2.setEnabled(true);
-                    b3.setEnabled(true);
-                    b4.setEnabled(true);
                     enable[0] ="Six";
                 }
         );
@@ -360,10 +290,7 @@ class ManageStudentRecords1 extends JFrame{
         seventh.addActionListener(
                 a->
                 {
-                    b1.setEnabled(true);
                     b2.setEnabled(true);
-                    b3.setEnabled(true);
-                    b4.setEnabled(true);
                     enable[0] ="Seven";
                 }
         );
@@ -371,10 +298,7 @@ class ManageStudentRecords1 extends JFrame{
         eighth.addActionListener(
                 a->
                 {
-                    b1.setEnabled(true);
                     b2.setEnabled(true);
-                    b3.setEnabled(true);
-                    b4.setEnabled(true);
                     enable[0] ="Eight";
                 }
         );
@@ -382,10 +306,7 @@ class ManageStudentRecords1 extends JFrame{
         nineth.addActionListener(
                 a->
                 {
-                    b1.setEnabled(true);
                     b2.setEnabled(true);
-                    b3.setEnabled(true);
-                    b4.setEnabled(true);
                     enable[0] ="Nine";
                 }
         );
@@ -393,10 +314,7 @@ class ManageStudentRecords1 extends JFrame{
         tenth.addActionListener(
                 a->
                 {
-                    b1.setEnabled(true);
                     b2.setEnabled(true);
-                    b3.setEnabled(true);
-                    b4.setEnabled(true);
                     enable[0] ="Ten";
                 }
         );
@@ -404,7 +322,7 @@ class ManageStudentRecords1 extends JFrame{
         b10.addActionListener(
                 a->
                 {
-                    new ManageNotice1();
+                    new adminNotice1();
                     dispose();
                 }
         );
@@ -413,12 +331,13 @@ class ManageStudentRecords1 extends JFrame{
         setSize(950, 500);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setTitle("Manager");
+        setTitle("Admin");
     }
 }
 
-class ManageStudentRecords{
+class AdminStudentRecords{
     public static void main(String[] args) {
-        ManageStudentRecords1 obj =new ManageStudentRecords1();
+        AdminStudentRecords1 obj =new AdminStudentRecords1();
     }
 }
+

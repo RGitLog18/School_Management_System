@@ -101,21 +101,32 @@ class teachereditRecord1 extends JFrame {
                         String newname=JOptionPane.showInputDialog("Enter new name:","");
 
                         // Validate new name text field
-                        if (!newname.isEmpty())
-                        {
-                            // SQL code to update student name
+                        if (!newname.isEmpty()) {
                             String url = "jdbc:mysql://localhost:3306/rdclasses";
+
                             try (Connection con = DriverManager.getConnection(url, "root", "R1a2j3#*")) {
-                                String sql = "UPDATE teacher_details SET name=? WHERE phone=?";
+                                String sql = "SELECT * FROM teacher_details WHERE phone=?";
                                 try (PreparedStatement pst = con.prepareStatement(sql)) {
-                                    pst.setString(1, newname);
-                                    pst.setString(2, t4.getText());
-                                    pst.executeUpdate();
-                                    t1.setText("");
-                                    t4.setText("");
-                                    JOptionPane.showMessageDialog(null,"Name changed Successfully");
+                                    pst.setString(1, t4.getText());
+
+                                    ResultSet rs = pst.executeQuery();
+                                    if (!rs.next()) {
+                                        JOptionPane.showMessageDialog(null, "Record does not exists.");
+                                    } else {
+                                        String sql1 = "UPDATE teacher_details SET name=? WHERE phone=?";
+                                        try (PreparedStatement pst1 = con.prepareStatement(sql1)) {
+                                            pst1.setString(1, newname);
+                                            pst1.setString(2, t4.getText());
+                                            pst1.executeUpdate();
+                                            t1.setText("");
+                                            t4.setText("");
+                                            t2.setText("");
+                                            JOptionPane.showMessageDialog(null, "Name changed Successfully");
+                                        }
+                                    }
                                 }
-                            } catch (Exception e) {
+                            }
+                            catch (Exception e) {
                                 e.printStackTrace();
                             }
                         }
@@ -139,6 +150,9 @@ class teachereditRecord1 extends JFrame {
                                     pst.executeUpdate();
 
                                     JOptionPane.showMessageDialog(null, "Email updated Successfully");
+                                    t1.setText("");
+                                    t4.setText("");
+                                    t2.setText("");
 
                                 }
                             } catch (Exception e) {
@@ -150,7 +164,7 @@ class teachereditRecord1 extends JFrame {
                             JOptionPane.showMessageDialog(null,"Please enter an email");
                         }
                     }
-                    if (settings.getSelectedItem().toString().equals("Student Address"))
+                    if (settings.getSelectedItem().toString().equals("Teacher Address"))
                     {
 
                         String newAddress=JOptionPane.showInputDialog("Enter new address:","");
@@ -169,6 +183,7 @@ class teachereditRecord1 extends JFrame {
                                     pst.executeUpdate();
                                     t1.setText("");
                                     t4.setText("");
+                                    t2.setText("");
                                     JOptionPane.showMessageDialog(null,"Address changed successfully.");
                                 }
                             }
@@ -200,6 +215,7 @@ class teachereditRecord1 extends JFrame {
                                     pst.executeUpdate();
                                     t1.setText("");
                                     t4.setText("");
+                                    t2.setText("");
                                     JOptionPane.showMessageDialog(null,"Phone number changed successfully.");
                                 }
                             } catch (Exception e) {
@@ -226,6 +242,7 @@ class teachereditRecord1 extends JFrame {
                                     pst.executeUpdate();
                                     t1.setText("");
                                     t4.setText("");
+                                    t2.setText("");
                                     JOptionPane.showMessageDialog(null,"Phone number changed successfully.");
                                 }
                             } catch (Exception e) {
@@ -252,6 +269,7 @@ class teachereditRecord1 extends JFrame {
                                     pst.executeUpdate();
                                     t1.setText("");
                                     t4.setText("");
+                                    t2.setText("");
                                     JOptionPane.showMessageDialog(null,"Gender changed successfully.");
 
                                 }
@@ -260,37 +278,162 @@ class teachereditRecord1 extends JFrame {
                             }
                         }
                     }
+
                     if(settings.getSelectedItem().toString().equals("Class"))
                     {
-                        String oldClass=JOptionPane.showInputDialog("Enter Class to be changed:","");
-                        dispose();
-                    }
-                    if(settings.getSelectedItem().toString().equals("Subject"))
-                    {
-                        int result=JOptionPane.showInternalConfirmDialog(null,classs,"Choose a class:",
+                        int result=JOptionPane.showInternalConfirmDialog(null,classs,"Choose a class to be changed:",
                                 JOptionPane.OK_CANCEL_OPTION,JOptionPane.QUESTION_MESSAGE);
                         if(result==JOptionPane.OK_OPTION)
                         {
                             String grade = Class.getSelectedItem().toString();
-                            int result1 = JOptionPane.showInternalConfirmDialog(null, classs, "Choose new class:",
-                                    JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
-                            String newgrade = Class.getSelectedItem().toString();
+
                             String url = "jdbc:mysql://localhost:3306/rdclasses";
+
                             try (Connection con = DriverManager.getConnection(url, "root", "R1a2j3#*")) {
-                                String sql = "UPdate subject_class_allocated set class=? where class=grade phone=" + t4.getText();
+                                String sql = "SELECT * FROM subject_class_allocated WHERE phone=? AND class=?";
                                 try (PreparedStatement pst = con.prepareStatement(sql)) {
-                                    pst.setString(1, newgrade);
-                                    pst.executeUpdate();
+                                    pst.setString(1, t4.getText());
+                                    pst.setString(2, grade);
+
+                                    ResultSet rs=pst.executeQuery();
+                                    if(!rs.next())
+                                    {
+                                        JOptionPane.showMessageDialog(null,"Record does not exists.");
+                                    }
+                                    else{
+                                        int result1 = JOptionPane.showInternalConfirmDialog(null, classs, "Choose new class:",
+                                                JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
+                                        String newgrade = Class.getSelectedItem().toString();
+                                        String sql1 = "UPdate subject_class_allocated set class=? where class=? and phone=?";
+                                        try (PreparedStatement pst1 = con.prepareStatement(sql1)) {
+                                            pst1.setString(1, newgrade);
+                                            pst1.setString(2, grade);
+                                            pst1.setString(3, t4.getText());
+                                            pst1.executeUpdate();
+                                            t1.setText("");
+                                            t4.setText("");
+                                            t2.setText("");
+                                            JOptionPane.showMessageDialog(null,"Class updated succesfully");
+                                        }
+                                    }
                                 }
-                            } catch (Exception e) {
-                                JOptionPane.showMessageDialog(null,e.getMessage());
                             }
+                                catch (Exception e)
+                                {
+                                    JOptionPane.showMessageDialog(null,e.getMessage());
+                                }
+                        }
+                        else {
+                            JOptionPane.showMessageDialog(null,"Please select a class.");
                         }
                     }
 
                     if(settings.getSelectedItem().toString().equals("Subject"))
                     {
+                        int result = JOptionPane.showInternalConfirmDialog(
+                                null, classs, "Choose a subject to be changed:",
+                                JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE
+                        );
 
+                        if (result == JOptionPane.OK_OPTION) {
+                            String grade = Class.getSelectedItem().toString();
+                            String url = "jdbc:mysql://localhost:3306/rdclasses";
+
+                            try (Connection con = DriverManager.getConnection(url, "root", "R1a2j3#*")) {
+                                String sql = "SELECT * FROM subject_class_allocated WHERE phone=? AND class=?";
+                                try (PreparedStatement pst = con.prepareStatement(sql)) {
+                                    pst.setString(1, t4.getText());
+                                    pst.setString(2, grade);
+
+                                    ResultSet rs = pst.executeQuery();
+
+                                    if (rs.next()) { // Ensure there's data before accessing
+                                        String s1 = rs.getString("Subject1");
+                                        String s2 = rs.getString("Subject2");
+                                        String s3 = rs.getString("Subject3");
+                                        String s4 = rs.getString("Subject4");
+                                        String s5 = rs.getString("Subject5");
+
+                                        // Ask user if they want to update or add a new subject
+                                        String[] options = {"Update Subject", "Add New Subject", "Cancel"};
+                                        int choice = JOptionPane.showOptionDialog(
+                                                null, "Do you want to update or add a new subject?",
+                                                "Subject Modification", JOptionPane.YES_NO_CANCEL_OPTION,
+                                                JOptionPane.QUESTION_MESSAGE, null, options, options[0]
+                                        );
+
+                                        if (choice == 1) { // User chose "Add New Subject"
+                                            // Check if all subject slots are filled
+                                            if (s1 != null && s2 != null && s3 != null && s4 != null && s5 != null) {
+                                                JOptionPane.showMessageDialog(null, "All 5 subject slots are already filled!");
+                                            } else {
+                                                String newSubject = JOptionPane.showInputDialog("Enter new subject name:");
+
+                                                // Determine the next available subject slot
+                                                String updateQuery = null;
+                                                if (s1 == null) updateQuery = "UPDATE subject_class_allocated SET Subject1=? WHERE phone=? AND class=?";
+                                                else if (s2 == null) updateQuery = "UPDATE subject_class_allocated SET Subject2=? WHERE phone=? AND class=?";
+                                                else if (s3 == null) updateQuery = "UPDATE subject_class_allocated SET Subject3=? WHERE phone=? AND class=?";
+                                                else if (s4 == null) updateQuery = "UPDATE subject_class_allocated SET Subject4=? WHERE phone=? AND class=?";
+                                                else if (s5 == null) updateQuery = "UPDATE subject_class_allocated SET Subject5=? WHERE phone=? AND class=?";
+
+                                                if (updateQuery != null) {
+                                                    try (PreparedStatement updatePst = con.prepareStatement(updateQuery)) {
+                                                        updatePst.setString(1, newSubject);
+                                                        updatePst.setString(2, t4.getText());
+                                                        updatePst.setString(3, grade);
+                                                        updatePst.executeUpdate();
+                                                        t1.setText("");
+                                                        t4.setText("");
+                                                        t2.setText("");
+                                                        JOptionPane.showMessageDialog(null, "Subject added successfully!");
+                                                    }
+                                                }
+                                            }
+                                        } else if (choice == 0) { // User chose "Update Subject"
+                                            String oldSubject = JOptionPane.showInputDialog("Enter subject name to update:");
+                                            String newSubject = JOptionPane.showInputDialog("Enter new subject name:");
+
+                                            String updateQuery = "UPDATE subject_class_allocated SET " +
+                                                    "Subject1 = CASE WHEN Subject1 = ? THEN ? ELSE Subject1 END, " +
+                                                    "Subject2 = CASE WHEN Subject2 = ? THEN ? ELSE Subject2 END, " +
+                                                    "Subject3 = CASE WHEN Subject3 = ? THEN ? ELSE Subject3 END, " +
+                                                    "Subject4 = CASE WHEN Subject4 = ? THEN ? ELSE Subject4 END, " +
+                                                    "Subject5 = CASE WHEN Subject5 = ? THEN ? ELSE Subject5 END " +
+                                                    "WHERE phone = ? AND class = ?";
+                                            try (PreparedStatement updatePst = con.prepareStatement(updateQuery)) {
+                                                updatePst.setString(1, oldSubject);
+                                                updatePst.setString(2, newSubject);
+                                                updatePst.setString(3, oldSubject);
+                                                updatePst.setString(4, newSubject);
+                                                updatePst.setString(5, oldSubject);
+                                                updatePst.setString(6, newSubject);
+                                                updatePst.setString(7, oldSubject);
+                                                updatePst.setString(8, newSubject);
+                                                updatePst.setString(9, oldSubject);
+                                                updatePst.setString(10, newSubject);
+                                                updatePst.setString(11, t4.getText());
+                                                updatePst.setString(12, grade);
+
+                                                int rowsUpdated = updatePst.executeUpdate();
+                                                if (rowsUpdated > 0) {
+                                                    t1.setText("");
+                                                    t4.setText("");
+                                                    t2.setText("");
+                                                    JOptionPane.showMessageDialog(null, "Subject updated successfully!");
+                                                } else {
+                                                    JOptionPane.showMessageDialog(null, "Subject not found for update!");
+                                                }
+                                            }
+                                        }
+                                    } else {
+                                        JOptionPane.showMessageDialog(null, "No such record exist.");
+                                    }
+                                }
+                            } catch (Exception e) {
+                                JOptionPane.showMessageDialog(null, "Error: " + e.getMessage());
+                            }
+                        }
                     }
                 }
         );
@@ -319,9 +462,9 @@ class teachereditRecord1 extends JFrame {
 
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setVisible(true);
-        setLocationRelativeTo(null);
         setSize(800,500);
-        setTitle("New Admission");
+        setLocationRelativeTo(null);
+        setTitle("Teacher Edit Record");
     }
 }
 class teachereditRecord{

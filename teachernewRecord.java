@@ -25,8 +25,11 @@ class teachernewRecord1 extends JFrame{
         JLabel l6 = new JLabel("Salary:");
         JTextField t6 = new JTextField(10);
 
+
+//        t9.add("French");
+
         JLabel l7 = new JLabel("Gender:");
-        JComboBox<String> genderBox = new JComboBox<>(new String[]{"male", "female", "other"});
+        JComboBox<String> genderBox = new JComboBox<>(new String[]{"Male", "Female", "Other"});
 
         JButton b1 = new JButton("Submit");
         JButton b2 = new JButton("Back");
@@ -89,28 +92,42 @@ class teachernewRecord1 extends JFrame{
         b2.setBounds(300, yStart + 6 * gap, 120, 40);
 
         b1.addActionListener(
-                a->{
-                    String url="jdbc:mysql://localhost:3306/rdclasses";
-                    try(Connection con=DriverManager.getConnection(url,"root","R1a2j3#*"))
-                    {
+                a-> {
+                    String url = "jdbc:mysql://localhost:3306/rdclasses";
+                    try (Connection con = DriverManager.getConnection(url, "root", "R1a2j3#*")) {
+                        String sql1 = "Select * from tacherdetails where name=? and phone=?";
+                        try (PreparedStatement pst1 = con.prepareStatement(sql1)) {
+                            pst1.setString(1, t1.getText());
+                            pst1.setString(2, t4.getText());
 
-                        String sql="insert into teacher_details(name,address,phone,email,gender,salary) values(?,?,?,?,?,?)";
-                        try(PreparedStatement pst=con.prepareStatement(sql))
-                        {
-                            pst.setString(1,t1.getText());
-                            pst.setString(2,t3.getText());
-                            pst.setString(3,t4.getText());
-                            pst.setString(4,t2.getText());
-                            pst.setString(5,(String)genderBox.getSelectedItem());
-                            pst.setString(6,t6.getText());
-                            pst.execute();
-                            JOptionPane.showMessageDialog(null,"Record Added");
+                            ResultSet rs = pst1.executeQuery();
 
+                            if (rs.next()) {
+                                JOptionPane.showMessageDialog(null, "Record already exists.");
+                            } else {
+
+                                String sql = "insert into teacher_details(name,address,phone,email,gender,salary) values(?,?,?,?,?,?)";
+                                try (PreparedStatement pst = con.prepareStatement(sql)) {
+                                    pst.setString(1, t1.getText());
+                                    pst.setString(2, t3.getText());
+                                    pst.setString(3, t4.getText());
+                                    pst.setString(4, t2.getText());
+                                    pst.setString(5, (String) genderBox.getSelectedItem());
+                                    pst.setString(6, t6.getText());
+                                    pst.execute();
+                                    t1.setText("");
+                                    t2.setText("");
+                                    t3.setText("");
+                                    t4.setText("");
+                                    t6.setText("");
+
+                                    JOptionPane.showMessageDialog(null, "Record Added");
+                                }
+                            }
                         }
                     }
-                    catch(Exception e)
-                    {
-                        JOptionPane.showMessageDialog(null,e.getMessage());
+                    catch (Exception e) {
+                        JOptionPane.showMessageDialog(null, e.getMessage());
                         e.printStackTrace();
                     }
                 }
@@ -148,9 +165,10 @@ class teachernewRecord1 extends JFrame{
 
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setVisible(true);
-        setLocationRelativeTo(null);
         setSize(800,550);
-        setTitle("New Admission");
+        setLocationRelativeTo(null);
+
+        setTitle("Teacher Admission");
     }
 }
 

@@ -12,17 +12,17 @@ class StudentLogin1 extends JFrame{
         JLabel l1=new JLabel("Enter Name:");
         JTextField t1=new JTextField(20);
 
-        JLabel l2=new JLabel("Enter Phone No.:");
+        JLabel l2=new JLabel("Enter Password.:");
         JPasswordField t2=new JPasswordField(20);
 
         JLabel l3=new JLabel("Enter Std:");
-        JComboBox<String> t3=new JComboBox<>(new String[]{"Five","Six","Seven","Eight","Nine","Ten"});
+        JComboBox<String> t3=new JComboBox<>(new String[]{"One","Two","Three","Four","Five","Six","Seven","Eight","Nine","Ten"});
 
         JButton b1=new JButton("Back");
 
         JButton b2=new JButton("Submit");
-        ImageIcon image=new ImageIcon("C:/myprojects/rdclasses/rdlogo.jpg");
-        Image imageIcon = image.getImage().getScaledInstance(90, 170, Image.SCALE_SMOOTH);
+        ImageIcon image=new ImageIcon("C:/myprojects/rdclasses/logo1.png");
+        Image imageIcon = image.getImage().getScaledInstance(90, 90, Image.SCALE_SMOOTH);
         image = new ImageIcon(imageIcon);
 
         JLabel label=new JLabel(image);

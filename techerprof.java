@@ -5,16 +5,16 @@ import java.awt.*;
 class teacherprof1 extends JFrame{
     teacherprof1(String name,int phone)
     {
-        Font f1=new Font("Calibri",Font.BOLD,20);
-        Font f2=new Font("Calibri",Font.PLAIN,20);
-        Font f3=new Font("Calibri",Font.BOLD,25);
+        Font f = new Font("Futura", Font.BOLD, 40);
+        Font f2 = new Font("Calibri", Font.PLAIN, 22);
+        Font f3 = new Font("Calibri", Font.BOLD, 22);
 
         JPanel sidepanel=new JPanel();
         sidepanel.setPreferredSize(new Dimension(250,0));///height auto adjust
         sidepanel.setBackground(new Color(70, 21, 107));
         sidepanel.setLayout(new BoxLayout(sidepanel,BoxLayout.Y_AXIS));
 
-        ImageIcon image=new ImageIcon("C:/myprojects/rdclasses/rdlogo.jpg");
+        ImageIcon image=new ImageIcon("C:/myprojects/rdclasses/logo1.png");
         Image imageIcon = image.getImage().getScaledInstance(90, 90, Image.SCALE_SMOOTH);
         image = new ImageIcon(imageIcon);
 
@@ -49,7 +49,7 @@ class teacherprof1 extends JFrame{
         b3.setAlignmentX(Component.CENTER_ALIGNMENT);
         b4.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        Tname.setFont(f1);
+        Tname.setFont(f3);
         Email.setFont(f2);
         email.setFont(f2);
         salary.setFont(f2);
@@ -76,22 +76,17 @@ class teacherprof1 extends JFrame{
 
         prof.setBounds(530,50,80,80);
 
-        Tname.setBounds(550,150,100,30);
-
-        Email.setBounds(300,200,200,30);
-        email.setBounds(400,200,80,30);
-
-        salary.setBounds(560,200,80,30);
-        Salary.setBounds(660,200,80,30);
-
-        Address.setBounds(300,250,80,60);
-        address.setBounds(400,250,300,60);
-
-        Contact.setBounds(300,330,80,30);
-        contact.setBounds(400,330,80,30);
-
-        Gender.setBounds(560,330,80,30);
-        gender.setBounds(660,330,80,30);
+        Tname.setBounds(500,150,200,30);
+        Email.setBounds(300,200,100,30);
+        email.setBounds(420,200,150,30);
+        salary.setBounds(600,200,100,30);
+        Salary.setBounds(720,200,100,30);
+        Address.setBounds(300,250,100,60);
+        address.setBounds(420,250,300,60);
+        Contact.setBounds(300,330,100,30);
+        contact.setBounds(420,330,150,30);
+        Gender.setBounds(600,330,100,30);
+        gender.setBounds(720,330,100,30);
 
         b1.setBounds(10,150,220,50);
         b2.setBounds(10,220,220,50);
@@ -171,7 +166,7 @@ class teacherprof1 extends JFrame{
                     address.setText(rs.getString("address"));
                     gender.setText(rs.getString("gender"));
                     email.setText(rs.getString("email"));
-                    Salary.setText(rs.getString("salary"));
+                    Salary.setText("₹ "+rs.getString("salary"));
 //                    c.repaint();
                 }
             }
@@ -185,7 +180,7 @@ class teacherprof1 extends JFrame{
         setSize(900,500);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setVisible(true);
-        setTitle("Student Profile");
+        setTitle("Teacher Profile");
         setLocationRelativeTo(null);
 
     }
@@ -193,6 +188,6 @@ class teacherprof1 extends JFrame{
 
 class teacherprof {
     public static void main(String[] args) {
-        teacherprof1 obj=new teacherprof1("Rema",1234);
+        teacherprof1 obj=new teacherprof1("Reshma Padhey",1234);
     }
 }

@@ -21,8 +21,8 @@ class start1 extends JFrame{
         image1= new ImageIcon(imageIcon1);
 
 
-        ImageIcon image=new ImageIcon("C:/myprojects/rdclasses/rdlogo.jpg");
-        Image imageIcon = image.getImage().getScaledInstance(90, 170, Image.SCALE_SMOOTH);
+        ImageIcon image=new ImageIcon("C:/myprojects/rdclasses/logo1.png");
+        Image imageIcon = image.getImage().getScaledInstance(90, 70, Image.SCALE_SMOOTH);
         image = new ImageIcon(imageIcon);
 
         JLabel label=new JLabel(image);
@@ -122,7 +122,7 @@ class start1 extends JFrame{
         b4.setBounds(10,360,220,50);
         report.setBounds(770,10,150,30);
         bgimg.setBounds(250,0,750,600);
-        label.setBounds(70,30,90,50);
+        label.setBounds(70,20,90,70);
         tag.setBounds(520,90,250,30);
         address.setBounds(50,460,250,10);
         contactdet.setBounds(5,480,250,10);
@@ -185,8 +185,9 @@ class start1 extends JFrame{
 
         setVisible(true);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setLocationRelativeTo(null);
         setSize(1000,600);
+        setLocationRelativeTo(null);
+
         setTitle("Start");
     }
 }

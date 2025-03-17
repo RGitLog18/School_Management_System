@@ -155,7 +155,7 @@ class ManageNotice1 extends JFrame {
         }
 
         // Ask for role selection
-        String[] roles = {"Student", "Teacher"};
+        String[] roles = {"Student", "Teacher","Admin"};
         String role = (String) JOptionPane.showInputDialog(this, "Select Role:", "Role Selection",
                 JOptionPane.QUESTION_MESSAGE, null, roles, roles[0]);
 

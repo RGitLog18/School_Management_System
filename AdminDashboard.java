@@ -1,8 +1,8 @@
 import javax.swing.*;
 import java.awt.*;
 
-class AdmiManager1 extends JFrame{
-    AdmiManager1()
+class Admin1 extends JFrame{
+    Admin1()
     {
         double balance = 0.0;
         Font f = new Font("Futura", Font.BOLD, 40);
@@ -27,13 +27,13 @@ class AdmiManager1 extends JFrame{
         sidepanel.setBackground(new Color(70, 21, 107));
         sidepanel.setLayout(new BoxLayout(sidepanel,BoxLayout.Y_AXIS));
 
-        JLabel Sname= new JLabel("Rakesh Mhatre");
+        JLabel Sname= new JLabel("Heera Singh");
         JLabel Classs=new JLabel("Email:");
-        JLabel classs=new JLabel("r@gmail.com");
+        JLabel classs=new JLabel("h@gmail.com");
         JLabel roll=new JLabel("Salary:");
-        JLabel Rollno=new JLabel("₹ 100000");
+        JLabel Rollno=new JLabel("₹ 300000");
         JLabel Address=new JLabel("Address:");
-        JLabel address=new JLabel("Ghodbanadar Road");
+        JLabel address=new JLabel("Paral");
         JLabel Contact=new JLabel("Contact:");
         JLabel contact=new JLabel("4591648822");
         JLabel Gender =new JLabel("Gender:");
@@ -47,10 +47,7 @@ class AdmiManager1 extends JFrame{
 
 
         JButton type1=new JButton("Teacher Records");
-        JButton b6 = new JButton("New Record");
         JButton b7 = new JButton("Check Records");
-        JButton b8 = new JButton("Edit Record");
-        JButton b9 = new JButton("Delete Record");
 
         JButton b5=new JButton("Back");
         JButton b10=new JButton("Notices");
@@ -80,7 +77,7 @@ class AdmiManager1 extends JFrame{
 
         label.setBounds(70,30,90,90);
         prof.setBounds(530,50,80,80);
-        Sname.setBounds(500,150,200,30);
+        Sname.setBounds(520,150,200,30);
         Classs.setBounds(300,200,100,30);
         classs.setBounds(420,200,150,30);
         roll.setBounds(600,200,100,30);
@@ -96,7 +93,6 @@ class AdmiManager1 extends JFrame{
         type.setBounds(10,205,220,45);
         type1.setBounds(10,265,220,45);
         b11.setBounds(10,320,220,45);
-//        b11.setBounds(10,375,220,45);
 
 
 
@@ -118,7 +114,6 @@ class AdmiManager1 extends JFrame{
 
         Container c = getContentPane();
         c.setLayout(null);
-//        c.add(b5);
         c.add(b10);
         c.add(b11);
         c.add(type);
@@ -142,35 +137,35 @@ class AdmiManager1 extends JFrame{
 
         type.addActionListener(
                 a -> {
-                    new ManageStudentRecords1();
+                    new AdminStudentRecords1();
                     dispose();
                 }
         );
 
         type1.addActionListener(
                 a->{
-                    new ManageTeacherRecords1();
+                    new adminTecRec1();
                     dispose();
                 }
         );
 
         b5.addActionListener(
                 a->{
-                    new AdmiManaLog1();
+                    new AdminLogin1();
                     dispose();
                 }
         );
 
         b11.addActionListener(
                 a->{
-                    new AdmiManaLog1();
+                    new AdminLogin1();
                     dispose();
                 }
         );
 
         b10.addActionListener(
                 a->{
-                    new ManageNotice1();
+                    new adminNotice1();
                     dispose();
                 }
         );
@@ -180,11 +175,11 @@ class AdmiManager1 extends JFrame{
         setSize(900, 500);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setTitle("Admistration Manager");
+        setTitle("Admin");
     }
 }
-class AdmiManager{
+class Admin{
     public static void main(String[] args) {
-        AdmiManager1 obj =new AdmiManager1();
+        Admin1 obj =new Admin1();
     }
 }

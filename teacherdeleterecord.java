@@ -100,9 +100,9 @@ class teacherdeleterecord1 extends JFrame{
 
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setVisible(true);
-        setLocationRelativeTo(null);
         setSize(800,500);
-        setTitle("New Admission");
+        setLocationRelativeTo(null);
+        setTitle("Delete Teacher Record");
     }
 }
 
